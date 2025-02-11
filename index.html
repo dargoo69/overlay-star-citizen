@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay Star Citizen - Twitch</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            font-family: Arial, sans-serif;
+        }
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .donation-box {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid cyan;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0 0 10px cyan;
+            overflow: hidden;
+        }
+        .donation-box h2 {
+            margin: 0;
+            font-size: 18px;
+            color: cyan;
+        }
+        .donation-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+        }
+        .donation-list li {
+            font-size: 14px;
+            padding: 5px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="donation-box">
+            <h2>Derniers Dons</h2>
+            <ul class="donation-list" id="donations">
+                <li>Aucun don pour le moment</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function updateDonations(donations) {
+            const donationList = document.getElementById('donations');
+            donationList.innerHTML = '';
+            donations.forEach(don => {
+                let li = document.createElement('li');
+                li.textContent = `${don.name} - ${don.amount}€`;
+                donationList.appendChild(li);
+            });
+        }
+
+        // Simulation des dons (à remplacer par une API réelle)
+        setInterval(() => {
+            const sampleDonations = [
+                { name: 'SpacePilot42', amount: 5 },
+                { name: 'StarHunterX', amount: 10 },
+                { name: 'GalacticDonor', amount: 20 }
+            ];
+            updateDonations(sampleDonations);
+        }, 5000);
+    </script>
+</body>
+</html>
